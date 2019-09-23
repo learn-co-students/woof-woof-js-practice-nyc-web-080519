@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target.className === "goodness") {
             flipGoodness(e.target.id)
         }
+        populateBar(data)
     })
 
 });
