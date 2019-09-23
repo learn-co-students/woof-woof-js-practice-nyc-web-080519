@@ -57,10 +57,29 @@ function dogSpanClick(){
 
 function addDogInfo(dog){
     const dogContainer = document.querySelector("#dog-summary-container")
+    // this reset the dogContainer
+    dogContainer.innerHTML = ""
     let name = dog.name
     let img = dog.image
     let behavior = dog.isGoodDog
     if(behavior === true){
+        behavior = "Good Dog!"
+    } else {
+        behavior = "Bad Dog!"
+    }
+    let dogDiv = document.createElement('div')
+    dogDiv.innerHTML = `<img src=${img}> <h2>${name}</h2><button>${behavior}</button>`
+    dogDiv.id = 'dog-info'
+    dogDiv.dataset['id'] = dog.id
+    dogContainer.append(dogDiv)
+}
+
+function addFilteredDogs(dog){
+    const dogContainer = document.querySelector("#dog-summary-container")
+    let name = dog.name
+    let img = dog.image
+    let behavior = dog.isGoodDog
+    if (behavior === true) {
         behavior = "Good Dog!"
     } else {
         behavior = "Bad Dog!"
@@ -110,12 +129,12 @@ function filterDog(){
             const goodDog = getDogs(true)
             btn.innerText = "Filter good dogs: ON"
             document.querySelector("#dog-summary-container").innerHTML = ""
-            goodDog.forEach(addDogInfo)
+            goodDog.forEach(addFilteredDogs)
         } else {
             const badDog = getDogs(false)
             document.querySelector("#dog-summary-container").innerHTML = ""
             btn.innerText = "Filter good dogs: OFF"
-            badDog.forEach(addDogInfo)
+            badDog.forEach(addFilteredDogs)
         }
     })
 }
